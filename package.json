@@ -1,0 +1,72 @@
+{
+  "name": "api",
+  "description": "API Template",
+  "version": "0.0.0",
+  "homepage": "",
+  "private": true,
+  "keywords": [
+    "feathers"
+  ],
+  "author": {},
+  "contributors": [],
+  "bugs": {},
+  "engines": {
+    "node": ">= 16.18.0"
+  },
+  "feathers": {
+    "language": "js",
+    "packager": "yarn",
+    "database": "postgresql",
+    "framework": "express",
+    "transports": [
+      "websockets"
+    ],
+    "schema": "typebox"
+  },
+  "directories": {
+    "lib": "src",
+    "test": "test"
+  },
+  "main": "src/client",
+  "type": "module",
+  "scripts": {
+    "start": "node src",
+    "dev": "nodemon src/",
+    "prettier": "npx prettier \"**/*.js\" --write",
+    "mocha": "cross-env NODE_ENV=test mocha test/ --recursive --exit",
+    "test": "cross-env NODE_ENV=test npm run migrate && npm run mocha",
+    "migrate": "knex migrate:latest",
+    "migrate:make": "knex migrate:make",
+    "seed:develop": "node ./seeds/develop"
+  },
+  "dependencies": {
+    "@feathersjs/authentication": "^5.0.0-pre.32",
+    "@feathersjs/authentication-client": "^5.0.0-pre.32",
+    "@feathersjs/authentication-local": "^5.0.0-pre.32",
+    "@feathersjs/authentication-oauth": "^5.0.0-pre.32",
+    "@feathersjs/configuration": "^5.0.0-pre.32",
+    "@feathersjs/errors": "^5.0.0-pre.32",
+    "@feathersjs/express": "^5.0.0-pre.32",
+    "@feathersjs/feathers": "^5.0.0-pre.32",
+    "@feathersjs/knex": "^5.0.0-pre.32",
+    "@feathersjs/schema": "^5.0.0-pre.32",
+    "@feathersjs/socketio": "^5.0.0-pre.32",
+    "@feathersjs/socketio-client": "^5.0.0-pre.32",
+    "@feathersjs/transport-commons": "^5.0.0-pre.32",
+    "@feathersjs/typebox": "^5.0.0-pre.32",
+    "compression": "^1.7.4",
+    "knex": "^2.3.0",
+    "pg": "^8.8.0",
+    "socket.io-client": "^4.5.3",
+    "winston": "^3.8.2"
+  },
+  "devDependencies": {
+    "@feathersjs/cli": "^5.0.0-pre.32",
+    "@feathersjs/rest-client": "^5.0.0-pre.32",
+    "axios": "^0.27.2",
+    "cross-env": "^7.0.3",
+    "mocha": "^10.0.0",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.7.1"
+  }
+}
