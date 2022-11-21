@@ -36,8 +36,10 @@
     "mocha": "cross-env NODE_ENV=test mocha test/ --recursive --exit",
     "test": "cross-env NODE_ENV=test npm run migrate && npm run mocha",
     "migrate": "knex migrate:latest",
+    "migrate:down": "knex migrate:down",
     "migrate:make": "knex migrate:make",
-    "seed:develop": "node ./seeds/develop"
+    "seed:develop": "node ./seeds/develop",
+    "seed:bible": "node ./seeds/bible"
   },
   "dependencies": {
     "@feathersjs/authentication": "^5.0.0-pre.32",
@@ -58,6 +60,7 @@
     "knex": "^2.3.0",
     "pg": "^8.8.0",
     "socket.io-client": "^4.5.3",
+    "typescript": "^4.9.3",
     "winston": "^3.8.2"
   },
   "devDependencies": {

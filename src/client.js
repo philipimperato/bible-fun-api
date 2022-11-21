@@ -1,5 +1,15 @@
 import { feathers } from '@feathersjs/feathers'
 import authenticationClient from '@feathersjs/authentication-client'
+const linesServiceMethods = ['find', 'get', 'create', 'update', 'patch', 'remove']
+
+const esvServiceMethods = ['find']
+
+const versesServiceMethods = ['find', 'get', 'create', 'update', 'patch', 'remove']
+
+const booksServiceMethods = ['find', 'get', 'create', 'update', 'patch', 'remove']
+
+const chaptersServiceMethods = ['find', 'get', 'create', 'update', 'patch', 'remove']
+
 export {}
 
 const userServiceMethods = ['find', 'get', 'create', 'update', 'patch', 'remove']
@@ -20,6 +30,26 @@ export const createClient = (connection, authenticationOptions = {}) => {
 
   client.use('users', connection.service('users'), {
     methods: userServiceMethods
+  })
+
+  client.use('chapters', connection.service('chapters'), {
+    methods: chaptersServiceMethods
+  })
+
+  client.use('books', connection.service('books'), {
+    methods: booksServiceMethods
+  })
+
+  client.use('verses', connection.service('verses'), {
+    methods: versesServiceMethods
+  })
+
+  client.use('esv', connection.service('esv'), {
+    methods: esvServiceMethods
+  })
+
+  client.use('lines', connection.service('lines'), {
+    methods: linesServiceMethods
   })
 
   return client

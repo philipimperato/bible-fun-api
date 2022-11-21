@@ -14,7 +14,7 @@ import { UserService, getOptions } from './users.class.js'
 export * from './users.class.js'
 export * from './users.schema.js'
 
-export const user = (app) => {
+export const users = (app) => {
   app.use('users', new UserService(getOptions(app)), {
     methods: ['find', 'get', 'create', 'update', 'patch', 'remove'],
     events: []
