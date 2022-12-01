@@ -17,11 +17,18 @@ export const chaptersSchema = Type.Object(
     // Psalms 150
     name: Type.String(),
     numOfVerses: Type.Number(),
+
   },
   { $id: 'Chapters', additionalProperties: false }
 )
 export const chaptersResolver = resolve({
-  properties: {}
+  properties: {
+    verses: async (_value, chapter, { app }) => {
+      const { id } = chapter
+      const query = { chapterId: id, $select: ['id', 'verse', 'verseText'] }
+      return await app.service('verses').find({ query, paginate: false })
+    }
+  }
 })
 
 export const chaptersExternalResolver = resolve({
@@ -29,7 +36,7 @@ export const chaptersExternalResolver = resolve({
 })
 
 // Schema for creating new entries
-export const chaptersDataSchema = Type.Pick(chaptersSchema, ['name'], {
+export const chaptersDataSchema = Type.Pick(chaptersSchema, ['name', 'chapterId', 'chapter'], {
   $id: 'ChaptersData',
   additionalProperties: false
 })
@@ -39,7 +46,7 @@ export const chaptersDataResolver = resolve({
 })
 
 // Schema for allowed query properties
-export const chaptersQueryProperties = Type.Pick(chaptersSchema, ['id', 'name', 'bookId'], {
+export const chaptersQueryProperties = Type.Pick(chaptersSchema, ['id', 'name', 'chapterId'], {
   additionalProperties: false
 })
 export const chaptersQuerySchema = querySyntax(chaptersQueryProperties)

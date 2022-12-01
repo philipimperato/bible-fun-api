@@ -32,7 +32,7 @@ export const versesExternalResolver = resolve({
   properties: {}
 })
 
-export const versesDataSchema = Type.Pick(versesSchema, ['verse', 'text'], {
+export const versesDataSchema = Type.Pick(versesSchema, ['verse', 'verseText'], {
   $id: 'VersesData',
   additionalProperties: false
 })
@@ -41,7 +41,7 @@ export const versesDataResolver = resolve({
   properties: {}
 })
 
-export const versesQueryProperties = Type.Pick(versesSchema, ['id', 'verse', 'text'], { additionalProperties: false })
+export const versesQueryProperties = Type.Pick(versesSchema, ['id', 'verse', 'verseText'], { additionalProperties: false })
 export const versesQuerySchema = querySyntax(versesQueryProperties)
 export const versesQueryValidator = getValidator(versesQuerySchema, queryValidator)
 export const versesQueryResolver = resolve({

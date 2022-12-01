@@ -32,9 +32,9 @@ class DevelopSeedSource {
         
         for (const { text: verses, name } of psalms) {
           const [book, rawChapter] = name.split(' ')
-          const chapterId = this.idBuilder({ rawBookId, chapterId: rawChapter }, 'BBCCC')
+          const chapterId = this.idBuilder({ bookId: rawBookId, chapterId: rawChapter }, 'BBCCC')
 
-          await knex
+          const [{ id: primaryChapterId }] = await knex
             .insert({
               bookId: rawBookId,
               chapterId,
@@ -42,6 +42,7 @@ class DevelopSeedSource {
               name: `${ book } ${ rawChapter }`
             })
             .into('chapters')
+            .returning('id')
             .catch(log)
 
           const verseIds = verses.map(v => parseInt(v.ID))
@@ -57,7 +58,7 @@ class DevelopSeedSource {
             if (scopedVerseIds.includes(verseId)) continue;
 
             const verseData = {
-              chapterId: rawChapter,
+              chapterId: primaryChapterId,
               verseId,
               verse,
               verseText: text,

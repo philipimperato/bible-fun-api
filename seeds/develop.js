@@ -23,7 +23,7 @@ class DevelopSeedSource {
   getSeed() {
     return { 
       seed: async (knex) => {
-        await this.truncate()
+        await knex.truncate('users')
 
         await knex
           .insert([ 
@@ -33,20 +33,8 @@ class DevelopSeedSource {
           ])
           .into('users')
           .catch(log)
-        
-        const { id: bookId } = await knex
-          .insert([
-            { name: 'Psalms', testament: 'New' }
-          ])
-          .into('books')
-          .catch(log)
 
         process.exit(0)
-      },
-
-      truncate: async () => {
-        await knex.truncate('users')
-        await knex.truncate('books')
       }
     }
   }

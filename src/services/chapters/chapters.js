@@ -28,17 +28,30 @@ export const chapters = (app) => {
         schemaHooks.validateQuery(chaptersQueryValidator),
         schemaHooks.validateData(chaptersDataValidator),
         schemaHooks.resolveQuery(chaptersQueryResolver),
-        schemaHooks.resolveData(chaptersDataResolver)
-      ]
+        schemaHooks.resolveData(chaptersDataResolver),
+      ],
+      find: []
     },
     after: {
       all: [
+        context => {
+          console.log(context.result)
+        },
         schemaHooks.resolveResult(chaptersResolver),
         schemaHooks.resolveExternal(chaptersExternalResolver)
+      ],
+      find: [
+        context => {
+          console.log(context.result)
+        }
       ]
     },
     error: {
-      all: []
+      all: [
+        context => {
+          console.log(context.error)
+        }
+      ]
     }
   })
 }
