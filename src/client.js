@@ -1,5 +1,7 @@
 import { feathers } from '@feathersjs/feathers'
 import authenticationClient from '@feathersjs/authentication-client'
+const notesServiceMethods = ['find', 'get', 'create', 'update', 'patch', 'remove']
+
 const linesServiceMethods = ['find', 'get', 'create', 'update', 'patch', 'remove']
 
 const esvServiceMethods = ['find']
@@ -50,6 +52,10 @@ export const createClient = (connection, authenticationOptions = {}) => {
 
   client.use('lines', connection.service('lines'), {
     methods: linesServiceMethods
+  })
+
+  client.use('notes', connection.service('notes'), {
+    methods: notesServiceMethods
   })
 
   return client
