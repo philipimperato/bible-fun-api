@@ -17,7 +17,6 @@ export const chaptersSchema = Type.Object(
     // Psalms 150
     name: Type.String(),
     numOfVerses: Type.Number(),
-
   },
   { $id: 'Chapters', additionalProperties: false }
 )

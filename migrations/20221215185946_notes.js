@@ -4,7 +4,7 @@ export async function up(knex) {
     table.integer('userId')
     table.integer('verseId')
 
-    table.string('note')
+    table.text('note')
 
     table.datetime('createdAt').defaultTo(new Date().toISOString())
     table.datetime('updatedAt').defaultTo(new Date().toISOString())

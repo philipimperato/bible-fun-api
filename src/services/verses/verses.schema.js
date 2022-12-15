@@ -25,14 +25,20 @@ export const versesSchema = Type.Object(
   { $id: 'Verses', additionalProperties: false }
 )
 export const versesResolver = resolve({
-  properties: {}
+  properties: {
+    notes: async (_value, verse, { app }) => {
+      const { id } = verse
+      const query = { verseId: id, $select: ['id', 'note', 'createdAt'] }
+      return await app.service('notes').find({ query, paginate: false })
+    }
+  }
 })
 
 export const versesExternalResolver = resolve({
   properties: {}
 })
 
-export const versesDataSchema = Type.Pick(versesSchema, ['verse', 'verseText'], {
+export const versesDataSchema = Type.Pick(versesSchema, ['verse', 'verseText', 'createdAt', 'notes'], {
   $id: 'VersesData',
   additionalProperties: false
 })
@@ -41,7 +47,7 @@ export const versesDataResolver = resolve({
   properties: {}
 })
 
-export const versesQueryProperties = Type.Pick(versesSchema, ['id', 'verse', 'verseText'], { additionalProperties: false })
+export const versesQueryProperties = Type.Pick(versesSchema, ['id', 'verse', 'verseText', 'createdAt', 'notes'], { additionalProperties: false })
 export const versesQuerySchema = querySyntax(versesQueryProperties)
 export const versesQueryValidator = getValidator(versesQuerySchema, queryValidator)
 export const versesQueryResolver = resolve({

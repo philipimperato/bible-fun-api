@@ -34,9 +34,6 @@ export const chapters = (app) => {
     },
     after: {
       all: [
-        context => {
-          console.log(context.result)
-        },
         schemaHooks.resolveResult(chaptersResolver),
         schemaHooks.resolveExternal(chaptersExternalResolver)
       ],

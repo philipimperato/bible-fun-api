@@ -8,7 +8,10 @@ export const notesSchema = Type.Object(
     userId: Type.Number(),
     verseId: Type.Number(),
 
-    note: Type.String()
+    note: Type.String(),
+
+    createdAt: Type.Optional(Type.String({ format: 'date-time' })),
+    updatedAt: Type.Optional(Type.String({ format: 'date-time' }))
   },
   { $id: 'Notes', additionalProperties: false }
 )
@@ -27,7 +30,7 @@ export const notesExternalResolver = resolve({
   properties: {}
 })
 
-export const notesDataSchema = Type.Pick(notesSchema, ['userId', 'verseId', 'note'], {
+export const notesDataSchema = Type.Pick(notesSchema, ['userId', 'verseId', 'note', 'createdAt'], {
   $id: 'NotesData',
   additionalProperties: false
 })
@@ -44,7 +47,7 @@ export const notesDataResolver = resolve({
 })
 
 export const notesQueryProperties = Type.Pick(notesSchema, 
-  ['id', 'userId', 'verseId', 'note'], 
+  ['id', 'userId', 'verseId', 'note', 'createdAt'], 
   { additionalProperties: false }
 )
 export const notesQuerySchema = querySyntax(notesQueryProperties)
